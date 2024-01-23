@@ -6,6 +6,13 @@ rows and columns
 
 
 def matrix_transpose(matrix):
+    """
+    Args:
+        matrix:
+
+    Returns:
+    A new matrix with the transpose of the given matrix
+    """
     matrix_rows = len(matrix)
     matrix_cols = len(matrix[0]) if matrix else 0
 
