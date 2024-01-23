@@ -14,10 +14,8 @@ def add_matrices2D(arr1, arr2):
     A new array with the sum of each element from the same index
     from each of the arrays
     """
-    added_arrays = []
     if len(arr1) != len(arr2) or len(arr1[0]) != len(arr2[0]):
         return None
-    for row1, row2 in zip(arr1, arr2):
-        for i, j in zip(row1, row2):
-            added_arrays.append(i + j)
-    return added_arrays[:2], added_arrays[2:]
+    added_arrays = [[i + j for i, j in zip(row1, row2)]
+                    for row1, row2 in zip(arr1, arr2)]
+    return added_arrays
