@@ -2,7 +2,6 @@
 """
 Returns a transposed matrix of a given numpy array
 """
-import numpy as np
 
 
 def np_transpose(matrix):
