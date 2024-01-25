@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
+import numpy as np
 """
 Returns a transposed matrix of a given numpy array
 """
-import numpy as np
 
 
 def np_transpose(matrix):
