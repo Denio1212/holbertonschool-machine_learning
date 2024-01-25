@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import numpy as np
 """
 Returns a transposed matrix of a given numpy array
 """
@@ -13,6 +12,6 @@ def np_transpose(matrix):
 
     Returns: A new numpy array
     """
-    trans = np.array([])
-    trans = np.transpose(matrix)
+    trans = matrix.array([])
+    trans = matrix.transpose(matrix)
     return trans
