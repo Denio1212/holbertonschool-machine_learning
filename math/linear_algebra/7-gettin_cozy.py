@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
-"""
-Concatenate two 2d matrices
+If the axis is 1, it adds the rows together and then adds the values.
 """
 
 
