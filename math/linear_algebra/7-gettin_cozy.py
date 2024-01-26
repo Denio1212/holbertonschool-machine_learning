@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""
+Concatenate two 2d matrices..
+Checks f#or the axis and if the matrices are the same length.
+Afterwards, if the matrix has an axis of 0, it adds them onto the concatenated
+matrix.
 If the axis is 1, it adds the rows together and then adds the values.
 """
 
