@@ -1,4 +1,10 @@
-ummation_i_squared(n):
+#!/usr/bin/env python3
+"""
+Calculates the sigma notation of a given n
+"""
+
+
+def summation_i_squared(n):
     """
     Summarizes the sigma of given n without loops
     Args:
