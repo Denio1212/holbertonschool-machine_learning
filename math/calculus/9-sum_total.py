@@ -12,4 +12,4 @@ def summation_i_squared(n):
 
     Returns: The sum
     """
-    return sum(i ** 2 for i in range(1, n + 1))
+    return int(n * (n + 1) * (2 * n + 1) / 6)
