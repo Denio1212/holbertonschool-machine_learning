@@ -12,6 +12,6 @@ def summation_i_squared(n):
 
     Returns: The sum
     """
-    if n < 3 or n is type(str):
+    if type(n) is not int:
         return None
     return int(n * (n + 1) * (2 * n + 1) / 6)
