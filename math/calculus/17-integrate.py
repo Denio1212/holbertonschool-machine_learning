@@ -20,4 +20,6 @@ def poly_integral(poly, C=0):
     integral_result.insert(0, C)
     integral_result = [int(coef) if int(coef) == coef
                        else coef for coef in integral_result]
+    while integral_result[-1] == 0 and len(integral_result) > 1:
+        integral_result.pop()
     return integral_result
