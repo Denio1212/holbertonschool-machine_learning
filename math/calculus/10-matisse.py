@@ -12,6 +12,9 @@ def poly_derivative(poly):
     """
     if not isinstance(poly, (list, tuple)):
         return None
+    for i in range(len(poly)):
+        if not isinstance(poly[i], (int, float)):
+            return None
     derivative = []
     for i in range(1, len(poly)):
         derivative.append(poly[i] * i)
