@@ -10,11 +10,11 @@ def poly_derivative(poly):
     :param poly: the given polynomial
     :return: The derivative of the polynomial
     """
-    if type(poly) is not list:
+    if not isinstance(poly, list):
         return None
     derivative = []
     for i in range(1, len(poly)):
         derivative.append(poly[i] * i)
-    if derivative == 0:
-        return '[0]'
+    if not derivative:
+        derivative = [0]
     return derivative
