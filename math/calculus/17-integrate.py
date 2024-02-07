@@ -17,6 +17,6 @@ def poly_integral(poly, C=0):
         if not isinstance(coef, (float, int)):
             return None
         integral_result.append(coef / (power + 1))
-        integral_result = [int(coef) if type(coef) is int
+        integral_result = [int(coef) if int(coef) == coef
                            else coef for coef in integral_result]
     return integral_result
