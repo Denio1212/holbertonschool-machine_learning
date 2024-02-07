@@ -10,7 +10,7 @@ def poly_derivative(poly):
     :param poly: the given polynomial
     :return: The derivative of the polynomial
     """
-    if not isinstance(poly, list):
+    if not isinstance(poly, (list, tuple)):
         return None
     derivative = []
     for i in range(1, len(poly)):
