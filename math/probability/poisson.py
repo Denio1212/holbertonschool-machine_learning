@@ -25,9 +25,9 @@ class Poisson:
 
     def pmf(self, k):
         """
-        :param self:
-        :param k:
-        :return:
+        :param self: refers to the class instance
+        :param k: value to be used for the poisson distribution
+        :return: the value of the PMF distribution
         """
         if type(k) is not int:
             k = int(k)
