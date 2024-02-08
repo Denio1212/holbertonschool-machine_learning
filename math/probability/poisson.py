@@ -3,6 +3,7 @@
 represent a poisson distribution
 """
 
+
 class Poisson:
     def __init__(self, data=None, lambtha=1):
         """
