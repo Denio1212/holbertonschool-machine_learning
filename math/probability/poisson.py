@@ -5,6 +5,9 @@ represent a poisson distribution
 
 
 class Poisson:
+    """
+    the poisson distribution class
+    """
     def __init__(self, data=None, lambtha=1):
         """
         represents a poisson distribution
