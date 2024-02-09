@@ -43,3 +43,20 @@ class Poisson:
             factorial *= i
         pmf = ((e ** -lambtha) * lambtha ** k) / factorial
         return pmf
+
+    def cdf(self, k):
+        """
+        Calculates the cumulative distribution for a given number of successes
+        :param k: number of successes
+        :return: cdf value for k
+        if k is not int, we convert it to one
+        if k is out of range, we return 0
+        """
+        if type(k) is not int:
+            k = int(k)
+        if k < 0:
+            return 0
+        cdf = 0
+        for i in range(k + 1):
+            cdf += self.pmf(i)
+        return cdf
