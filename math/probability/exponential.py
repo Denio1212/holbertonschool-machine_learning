@@ -31,14 +31,14 @@ class Exponential:
         if data does not contain at least two elements, value error:
         "data must contain multiple values"
         """
-        self.lambtha = float(lambtha)
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
+            else:
+                self.lambtha = float(lambtha)
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
             if len(data) < 1:
                 raise ValueError("data must contain multiple values")
-
-            self.lambtha = 1 / sum(data) / len(data)
+            self.lambtha = float(len(data) / sum(data))
