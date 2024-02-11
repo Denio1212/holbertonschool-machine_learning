@@ -3,6 +3,7 @@
 Creates a class that represents normal distribution
 """
 
+
 class Normal:
     """
     Houses a constructor with a mean and a standard deviation
@@ -37,4 +38,5 @@ class Normal:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             self.mean = sum(data) / len(data)
-            self.stddev = (sum((ent - self.mean) ** 2 for ent in data) / len(data)) ** 0.5
+            self.stddev = (sum((ent - self.mean) ** 2 for ent in data)
+                           / len(data)) ** 0.5
