@@ -8,6 +8,7 @@ class Normal:
     """
     Houses a constructor with a mean and a standard deviation
     """
+
     def __init__(self, data=None, mean=0, stddev=1.):
         """
         :param data: the list of data used
@@ -39,7 +40,7 @@ class Normal:
                 raise ValueError("data must contain multiple values")
             self.mean = sum(data) / len(data)
             self.stddev = (sum((ent - self.mean) ** 2 for ent in data)
-                          / len(data)) ** 0.5
+                           / len(data)) ** 0.5
 
     def z_score(self, x):
         """
