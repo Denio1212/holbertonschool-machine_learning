@@ -57,3 +57,12 @@ class Normal:
         :return: x-value of z
         """
         return float(self.mean + z * self.stddev)
+
+    def pdf(self, x):
+        """
+        calculates the value of the pdf of a given x-value
+        :param x: the x-value
+        :return: pdf value for x
+        """
+        import math
+        return (1 / (self.stddev * math.sqrt(2 * math.pi))) * math.exp(-0.5 * ((x - self.mean) / self.stddev) ** 2)
