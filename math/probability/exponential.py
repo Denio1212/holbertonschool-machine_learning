@@ -62,11 +62,10 @@ class Exponential:
         :param x: the given time period
         :return: cdf value for x
         """
-        e = 2.7182818285
-        if x <= 0:
+        if x < 0:
             return 0
-        else:
-            floated = 1 - e ** (-self.lambtha * x)
-            if floated == 0:
-                return 0.0
-            return floated
+        e = 2.7182818285
+        floated = 1 - e ** (-self.lambtha * x)
+        if floated == 0:
+            return 0.0
+        return floated
