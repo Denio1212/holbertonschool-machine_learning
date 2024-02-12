@@ -64,7 +64,7 @@ class Exponential:
         """
         e = 2.7182818285
         if x <= 0:
-            return 0.0
+            return 0
         else:
             floated = 1 - e ** (-self.lambtha * x)
             return floated
