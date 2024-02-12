@@ -64,5 +64,15 @@ class Normal:
         :param x: the x-value
         :return: pdf value for x
         """
-        import math
-        return (1 / (self.stddev * math.sqrt(2 * math.pi))) * math.exp(-0.5 * ((x - self.mean) / self.stddev) ** 2)
+        π = 3.1415926536
+        e = 2.7182818285
+        return ((1 / (self.stddev * ((2 * π) ** 0.5))) *
+                (e ** (-0.5 * ((x - self.mean) / self.stddev) ** 2)))
+
+    def cdf(self, x):
+        """
+        calculates the cdf of a given x-value
+        :param x: the x-value
+        :return: cdf value for x
+        """
+        return
