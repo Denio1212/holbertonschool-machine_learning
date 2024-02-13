@@ -35,7 +35,7 @@ class Binomial:
         if data is smaller than 2:
         Value error -> "data must contain multiple values"
         """
-        self.n = int(n)
+        self.n = n
         self.p = float(p)
         if data is None:
             if self.n <= 0:
@@ -45,7 +45,17 @@ class Binomial:
         if data is not None:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
-            if len(data) < 2:
+            elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            self.p = (2 * (sum(data) / len(data)) / 100)
-            self.n = round(len(data) / 2)
+            else:
+                mean = float(sum(data) / len(data))
+                summation = 0
+                for x in data:
+                    summation += (x - mean) ** 2
+                variance = summation / len(data)
+                q = variance / mean
+                p = (1 - q)
+                n = round(mean / p)
+                p = float(mean / n)
+                self.n = n
+                self.p = p
