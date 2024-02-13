@@ -75,4 +75,12 @@ class Normal:
         :param x: the x-value
         :return: cdf value for x
         """
-        return
+        mean = self.mean
+        stddev = self.stddev
+        pi = 3.1415926536
+        value = (x - mean) / (stddev * (2 ** (1 / 2)))
+        erf = value - ((value ** 3) / 3) + ((value ** 5) / 10)
+        erf = erf - ((value ** 7) / 42) + ((value ** 9) / 216)
+        erf *= (2 / (pi ** (1 / 2)))
+        cdf = (1 / 2) * (1 + erf)
+        return cdf
