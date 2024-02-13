@@ -40,8 +40,12 @@ class Binomial:
         if data is None:
             if self.n <= 0:
                 raise ValueError("n must be positive value")
+            else:
+                self.n = n
             if 0 <= self.n >= 1:
                 raise ValueError("p must be greater than 0 and less than 1")
+            else:
+                self.p = p
         if data is not None:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
