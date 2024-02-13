@@ -40,12 +40,12 @@ class Binomial:
         if data is None:
             if self.n <= 0:
                 raise ValueError("n must be positive value")
-            if 0 >= self.n > 1:
+            if 0 <= self.n >= 1:
                 raise ValueError("p must be greater than 0 and less than 1")
         if data is not None:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
-            elif len(data) < 2:
+            if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             else:
                 mean = float(sum(data) / len(data))
