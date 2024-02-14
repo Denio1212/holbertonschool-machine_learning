@@ -73,7 +73,7 @@ class Binomial:
         nk_factorial = 1
         if type(k) is not int:
             k = int(k)
-        if k <= 0:
+        if k < 0:
             return 0
         for i in range(self.n):
             n_factorial *= (i + 1)
@@ -92,7 +92,7 @@ class Binomial:
         """
         if type(k) is not int:
             k = int(k)
-        if k <= 0:
+        if k < 0:
             return 0
         cdf_value = 0
         for i in range(k + 1):
