@@ -35,28 +35,26 @@ class Binomial:
         if data is smaller than 2:
         Value error -> "data must contain multiple values"
         """
-        self.n = n
-        self.p = float(p)
         if data is None:
-            if self.n <= 0:
+            if n < 1:
                 raise ValueError("n must be a positive value")
             else:
                 self.n = n
-            if 0 <= self.p >= 1:
+            if p <= 0 or p >= 1:
                 raise ValueError("p must be greater than 0 and less than 1")
             else:
                 self.p = p
-        if data is not None:
-            if not isinstance(data, list):
+        else:
+            if type(data) is not list:
                 raise TypeError("data must be a list")
-            if len(data) < 2:
+            elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
             else:
                 mean = float(sum(data) / len(data))
                 summation = 0
                 for x in data:
-                    summation += (x - mean) ** 2
-                variance = summation / len(data)
+                    summation += ((x - mean) ** 2)
+                variance = (summation / len(data))
                 q = variance / mean
                 p = (1 - q)
                 n = round(mean / p)
