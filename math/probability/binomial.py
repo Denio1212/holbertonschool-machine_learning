@@ -76,9 +76,9 @@ class Binomial:
         if k <= 0:
             return 0
         for i in range(self.n):
-            n_factorial *= (self.n + 1)
+            n_factorial *= (i + 1)
         for j in range(k):
-            k_factorial *= (k + 1)
+            k_factorial *= (j + 1)
         for ij in range(self.n - k):
             nk_factorial *= (ij + 1)
         nk_binom = n_factorial / (k_factorial * nk_factorial)
