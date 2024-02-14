@@ -61,3 +61,32 @@ class Binomial:
                 p = float(mean / n)
                 self.n = n
                 self.p = p
+
+    def pmf(self, k):
+        """
+        calculates the probability mass function of k
+        :param k: number of successes
+        :return: pmf value for k
+        """
+        n_factorial = 1
+        k_factorial = 1
+        nk_factorial = 1
+        if type(k) is not int:
+            k = int(k)
+        if k <= 0:
+            return 0
+        for i in range(self.n):
+            n_factorial *= (self.n + 1)
+        for j in range(k):
+            k_factorial *= (k + 1)
+        for ij in range(self.n - k):
+            nk_factorial *= (ij + 1)
+        nk_binom = n_factorial / (k_factorial * nk_factorial)
+        return nk_binom * (self.p ** k) * ((1 - self.p) ** (self.n - k))
+
+    def cdf(self, k):
+        """
+        Calculates the value of cdf for a given k value
+        :param k: number of successes
+        :return:
+        """
