@@ -88,5 +88,13 @@ class Binomial:
         """
         Calculates the value of cdf for a given k value
         :param k: number of successes
-        :return:
+        :return: cdf value for k
         """
+        if type(k) is not int:
+            k = int(k)
+        if k <= 0:
+            return 0
+        cdf_value = 0
+        for i in range(k + 1):
+            cdf_value += self.pmf(i)
+        return cdf_value
