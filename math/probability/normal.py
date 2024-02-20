@@ -39,4 +39,55 @@ class Normal:
                 raise ValueError("data must contain multiple values")
             self.mean = sum(data) / len(data)
             self.stddev = (sum((ent - self.mean) ** 2 for ent in data)
-                           / len(data)) ** 0.5
+
+
+        mean = self.mean
+        stddev = self.stddev
+        pi = 3.1415926536
+        value = (x - mean) / (stddev * (2 ** (1 / 2)))
+        erf = value - ((value ** 3) / 3) + ((value ** 5) / 10)
+        erf = erf - ((value ** 7) / 42) + ((value ** 9) / 216)
+        erf *= (2 / (pi ** (1 / 2)))
+        cdf = (1 / 2) * (1 + erf)
+        return cdf    def z_score(self, x):
+        """
+        Calculates the z score of a given value
+        :param x: the given x value
+        :return: z_score of x
+        """
+        return float((x - self.mean) / self.stddev)
+
+    def x_value(self, z):
+        """
+        calculates the x value of a given z-score
+        :param z: the z-score of x
+        :return: x-value of z
+        """
+        return float(self.mean + z * self.stddev)
+
+    def pdf(self, x):
+        """
+        calculates the value of the pdf of a given x-value
+        :param x: the x-value
+        :return: pdf value for x
+        """
+        p = 3.1415926536
+        e = 2.7182818285
+        return ((1 / (self.stddev * ((2 * p) ** 0.5))) *
+                (e ** (-0.5 * ((x - self.mean) / self.stddev) ** 2)))
+
+    def cdf(self, x):
+        """
+        calculates the cdf of a given x-value
+        :param x: the x-value
+        :return: cdf value for x
+        """
+        mean = self.mean
+        stddev = self.stddev
+        pi = 3.1415926536
+        value = (x - mean) / (stddev * (2 ** (1 / 2)))
+        erf = value - ((value ** 3) / 3) + ((value ** 5) / 10)
+        erf = erf - ((value ** 7) / 42) + ((value ** 9) / 216)
+        erf *= (2 / (pi ** (1 / 2)))
+        cdf = (1 / 2) * (1 + erf)
+        return cdf
