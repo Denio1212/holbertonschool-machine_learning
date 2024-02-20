@@ -45,8 +45,8 @@ def likelihood(x, n, P):
         raise ValueError("x cannot be greater than n")
     if np.any(P < 0) or np.any(P > 1):
         raise ValueError("All values in P must be in the range [0, 1]")
-    n_factorial = np.math.factorial(n)
+    n_factorials = np.math.factorial(n)
     x_factorial = np.math.factorial(x)
-    likelihoods = ((n_factorial / (x_factorial * np.math.factorial(n - x)))
+    likelihoods = ((n_factorials / (x_factorial * np.math.factorial(n - x)))
                    * (P ** x) * ((1 - P) ** (n - x)))
     return likelihoods

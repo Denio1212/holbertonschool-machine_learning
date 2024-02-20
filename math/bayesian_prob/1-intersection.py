@@ -12,7 +12,7 @@ def intersection(x, n, P, Pr):
     """
     Calculates the intersection from the data given.
     :param x: number of patients with side effects
-    :param n: total number of patients
+    :param n: total number of patients there are
     :param P: 1D numpy array containing various probabilities of side effects
     :param Pr: 1D numpy array containing the prior probabilities of side effects
     :return: 1D numpy array containing the intersection of obtaining x and n
