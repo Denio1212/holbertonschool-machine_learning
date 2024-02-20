@@ -20,7 +20,8 @@ def marginal(x, n, P, Pr):
         raise ValueError("n must be a positive integer")
 
     if not isinstance(x, int) or x < 0:
-        raise ValueError("x must be an integer that is greater than or equal to 0")
+        raise ValueError("x must be an integer that is greater than or"
+                         " equal to 0")
 
     if x > n:
         raise ValueError("x cannot be greater than n")
@@ -29,7 +30,8 @@ def marginal(x, n, P, Pr):
         raise TypeError("P must be a 1D numpy.ndarray")
 
     if not isinstance(Pr, np.ndarray) or Pr.ndim != 1 or Pr.shape != P.shape:
-        raise TypeError("Pr must be a 1D numpy.ndarray with the same shape as P")
+        raise TypeError("Pr must be a 1D numpy.ndarray with the same"
+                        " shape as P")
 
     if np.any(P < 0) or np.any(P > 1):
         raise ValueError("All values in P must be in the range [0, 1]")
