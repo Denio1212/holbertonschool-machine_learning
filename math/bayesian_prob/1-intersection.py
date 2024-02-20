@@ -15,7 +15,8 @@ def intersection(x, n, P, Pr):
     :param x: number of patients with side effects
     :param n: total number of patients there are
     :param P: 1D numpy array containing various probabilities of side effects
-    :param Pr: 1D numpy array containing the prior probabilities of side effects
+    :param Pr: 1D numpy array containing the prior probabilities of side
+    effects
     :return: 1D numpy array containing the intersection of obtaining x and n
     with each probability in P, respectively.
 
@@ -43,7 +44,8 @@ def intersection(x, n, P, Pr):
         raise ValueError("n must be a positive integer")
 
     if not isinstance(x, int) or x < 0:
-        raise ValueError("x must be an integer that is greater than or equal to 0")
+        raise ValueError("x must be an integer that is greater than or "
+                         "equal to 0")
 
     if x > n:
         raise ValueError("x cannot be greater than n")
@@ -55,7 +57,7 @@ def intersection(x, n, P, Pr):
         raise TypeError("Pr must be a numpy.ndarray with the same shape as P")
 
     if np.any(P < 0) or np.any(P > 1) or np.any(Pr < 0) or np.any(Pr > 1):
-        raise ValueError("All values in P and Pr must be in the range [0, 1]")
+        raise ValueError("All values in {P} must be in the range [0, 1]")
 
     if not np.isclose(np.sum(Pr), 1):
         raise ValueError("Pr must sum to 1")
