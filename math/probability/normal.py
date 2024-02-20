@@ -8,7 +8,6 @@ class Normal:
     """
     Houses a constructor with a mean and a standard deviation
     """
-
     def __init__(self, data=None, mean=0, stddev=1.):
         """
         :param data: the list of data used
@@ -57,30 +56,3 @@ class Normal:
         :return: x-value of z
         """
         return float(self.mean + z * self.stddev)
-
-    def pdf(self, x):
-        """
-        calculates the value of the pdf of a given x-value
-        :param x: the x-value
-        :return: pdf value for x
-        """
-        π = 3.1415926536
-        e = 2.7182818285
-        return ((1 / (self.stddev * ((2 * π) ** 0.5))) *
-                (e ** (-0.5 * ((x - self.mean) / self.stddev) ** 2)))
-
-    def cdf(self, x):
-        """
-        calculates the cdf of a given x-value
-        :param x: the x-value
-        :return: cdf value for x
-        """
-        mean = self.mean
-        stddev = self.stddev
-        pi = 3.1415926536
-        value = (x - mean) / (stddev * (2 ** (1 / 2)))
-        erf = value - ((value ** 3) / 3) + ((value ** 5) / 10)
-        erf = erf - ((value ** 7) / 42) + ((value ** 9) / 216)
-        erf *= (2 / (pi ** (1 / 2)))
-        cdf = (1 / 2) * (1 + erf)
-        return cdf
