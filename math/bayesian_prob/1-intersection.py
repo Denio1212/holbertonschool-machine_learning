@@ -58,8 +58,11 @@ def intersection(x, n, P, Pr):
 
     if not np.isclose(np.sum(Pr), 1):
         raise ValueError("Pr must sum to 1")
-    scipy_special_binom = (np.math.factorial(n) // (np.math.factorial(x) *
-                           np.math.factorial(n - x)))
+    if n < x or x < 0:
+        return 0
+    else:
+        scipy_special_binom = (np.math.factorial(n) // (np.math.factorial(x) *
+                                                        np.math.factorial(n - x)))
     likelihood = scipy_special_binom * np.power(P, x) * np.power(1.0 - P, n - x)
     intersections = likelihood * Pr
     return intersections
