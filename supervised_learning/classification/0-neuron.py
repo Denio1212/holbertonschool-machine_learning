@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Write a class Neuron that defines a single neuron performing binary classification:
+Write a class Neuron that defines a single neuron performing binary
+classification
 """
 
 import numpy as np
@@ -23,11 +24,14 @@ class Neuron:
 
         Public instance attributes:
 
-        W: The weights vector for the neuron. Upon instantiation, it should be initialized using a random normal distribution.
+        W: The weights vector for the neuron. Upon instantiation, it should be
+        initialized using a random normal distribution.
 
-        b: The bias for the neuron. Upon instantiation, it should be initialized to 0.
+        b: The bias for the neuron. Upon instantiation,
+        it should be initialized to 0.
 
-        A: The activated output of the neuron (prediction). Upon instantiation, it should be initialized to 0.
+        A: The activated output of the neuron (prediction).
+        Upon instantiation, it should be initialized to 0.
         """
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
