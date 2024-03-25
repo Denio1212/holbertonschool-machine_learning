@@ -3,6 +3,7 @@
 Calculates a pass of gradient descent on the neuron
 """
 
+
 import numpy as np
 
 
