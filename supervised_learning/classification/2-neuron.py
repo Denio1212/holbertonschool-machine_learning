@@ -6,6 +6,7 @@ forward propagation of the neuron
 Updates the __A with the sigmoid activation function
 """
 
+
 import numpy as np
 
 
