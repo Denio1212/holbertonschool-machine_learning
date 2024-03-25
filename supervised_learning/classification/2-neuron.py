@@ -19,7 +19,7 @@ class Neuron:
         Initializer
         """
         if not isinstance(nx, int):
-            raise TypeError('nx must be a integer')
+            raise TypeError('nx must be an integer')
         if nx < 1:
             raise ValueError('nx must be positive')
 
@@ -42,6 +42,8 @@ class Neuron:
     def forward_prop(self, X):
         """
         Calculates the forward propagation of the neuron
+        Z is the forward propagation
+        under z is the sigmoid activation function
         """
         Z = np.matmul(self.__W, X) + self.__b
         self.__A = 1 / (1 + np.exp(-Z))
