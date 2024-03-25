@@ -3,6 +3,10 @@
 Adds getters and makes the instances private
 """
 
+
+import numpy as np
+
+
 class Neuron:
     """
     Neuron class
