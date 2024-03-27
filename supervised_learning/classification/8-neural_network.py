@@ -10,7 +10,6 @@ class NeuralNetwork:
     """
     A neural network with one hidden layer performing binary classification
     """
-
     def __init__(self, nx, nodes):
         """
         nx is the number of input features
@@ -28,8 +27,8 @@ class NeuralNetwork:
             raise ValueError('nodes must be a positive integer')
 
         self.W1 = np.random.randn(nodes, nx)
-        self.W2 = np.random.randn(nodes, 1)
-        self.b1 = np.zeros((1, nodes))
+        self.W2 = np.random.randn(1, nodes)
+        self.b1 = np.zeros((nodes, 1))
         self.b2 = 0
         self.A1 = 0
         self.A2 = 0
