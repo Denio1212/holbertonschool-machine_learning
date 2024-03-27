@@ -16,9 +16,8 @@ class NeuralNetwork:
         nx is the number of input features
 
         nodes is the number of nodes in the hidden layer
+
         """
-        self.nodes = nodes
-        self.nx = nx
         if not isinstance(nx, int):
             raise TypeError('nx must be an integer')
         if nx < 1:
@@ -28,8 +27,8 @@ class NeuralNetwork:
         if nodes < 1:
             raise ValueError('nodes must be a positive integer')
 
-        self.W1 = np.random.randn(nx, nodes)
-        self.W2 = np.random.randn(1, nodes)
+        self.W1 = np.random.randn(nodes, nx)
+        self.W2 = np.random.randn(nodes, 1)
         self.b1 = np.zeros((1, nodes))
         self.b2 = 0
         self.A1 = 0
