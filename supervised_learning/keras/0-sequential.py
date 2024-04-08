@@ -32,6 +32,6 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
             input_dim=nx
         ))
         if i < (len(layers)) - 1 and keep_prob is not None:
-            model.add(keras.layers.Dropout(keep_prob))
+            model.add(keras.layers.Dropout(1 - keep_prob))
 
     return model
