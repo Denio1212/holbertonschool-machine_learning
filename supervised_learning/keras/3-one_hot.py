@@ -11,4 +11,5 @@ def one_hot(labels, classes=None):
     """
     Converts a matrix of integers into a one-hot matrix
     """
-    keras.utils.to_categorical(labels, num_classes=classes)
+    return keras.utils.to_categorical(labels, num_classes=classes)
+
