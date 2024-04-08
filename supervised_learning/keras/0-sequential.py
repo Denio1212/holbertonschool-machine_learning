@@ -31,6 +31,7 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
             kernel_regularizer=keras.regularizers.l2(lambtha),
             input_dim=nx
         ))
-        model.add(keras.layers.Dropout(keep_prob))
+        if i < len(layers) - 1:
+            model.add(keras.layers.Dropout(keep_prob))
 
     return model
