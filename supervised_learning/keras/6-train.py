@@ -8,7 +8,7 @@ import tensorflow.keras as keras
 
 def train_model(network, data, labels, batch_size,
                 epochs, validation_data=None, early_stopping=False,
-                patience=0 ,verbose=True, shuffle=False):
+                patience=0, verbose=True, shuffle=False):
     """
     Trains a model using mini batch gradient descent
 
@@ -29,7 +29,8 @@ def train_model(network, data, labels, batch_size,
     Normally, it is a good idea to shuffle,
     but for reproducibility, we have chosen to set the default to False.
 
-    :param early_stopping: boolean that determines when early stopping is triggered
+    :param early_stopping: boolean that determines when early stopping
+    is triggered
 
     :param patience: the patience for early stopping
 
@@ -37,7 +38,8 @@ def train_model(network, data, labels, batch_size,
     """
     if early_stopping and validation_data:
         callbacks = []
-        callbacks = [keras.callbacks.EarlyStopping(monitor='val_loss', patience=patience)]
+        callbacks = [keras.callbacks.EarlyStopping(monitor='val_loss',
+                                                   patience=patience)]
     else:
         callbacks = None
     history = network.fit(
