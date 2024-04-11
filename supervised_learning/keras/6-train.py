@@ -36,7 +36,7 @@ def train_model(network, data, labels, batch_size,
 
     :return: history of the model
     """
-    if early_stopping and validation_data:
+    if early_stopping and validation_data is not None:
         callbacks = []
         callbacks = [keras.callbacks.EarlyStopping(monitor='val_loss',
                                                    patience=patience)]
