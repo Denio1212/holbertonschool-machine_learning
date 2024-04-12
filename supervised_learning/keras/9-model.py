@@ -3,7 +3,6 @@
 Makes a save model and a load model, which do exactly what they say
 """
 
-
 import tensorflow.keras as K
 
 
@@ -18,6 +17,8 @@ def save_model(network, filename):
     :return: None
     """
     network.save(filename)
+    return None
+
 
 def load_model(filename):
     """
