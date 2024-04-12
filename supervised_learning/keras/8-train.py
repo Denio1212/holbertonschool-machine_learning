@@ -62,10 +62,10 @@ def train_model(network, data, labels, batch_size,
         callbacks = [keras.callbacks.LearningRateScheduler(learn_schedule,
                                                            verbose=1)]
     if save_best:
-        checkpoint = keras.callbacks.ModelCheckpoint(filepath=filepath,
-                                                     monitor='val_loss',
-                                                     save_best_only=True)
-        callbacks.append(checkpoint)
+        checkpoint_best = keras.callbacks.ModelCheckpoint(filepath=filepath,
+                                                          monitor='val_loss',
+                                                          save_best_only=True)
+        callbacks.append(checkpoint_best)
 
     history = network.fit(
         x=data,

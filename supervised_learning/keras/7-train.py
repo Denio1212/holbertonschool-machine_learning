@@ -36,6 +36,7 @@ def train_model(network, data, labels, batch_size,
     :param patience: the patience for early stopping
 
     :param learning_rate_decay: boolean that determines whether to decay
+    learning rate formula is the one used in the loss function
 
     :param alpha: initial decay rate
 
