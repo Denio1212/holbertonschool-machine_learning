@@ -9,7 +9,7 @@ import tensorflow.keras as keras
 
 def save_weights(network, filename, save_format='h5'):
     """
-    Save weights
+    Saves weights
     """
     network.save_weights(filename=filename, save_format=save_format)
 
