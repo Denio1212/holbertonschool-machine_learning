@@ -34,4 +34,3 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
             x = keras.layers.Dropout(1 - keep_prob)(x)
     model = keras.Model(inputs, x)
     return model
-
