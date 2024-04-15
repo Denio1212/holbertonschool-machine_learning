@@ -11,7 +11,7 @@ import tensorflow.compat.v1 as tf
 
 def create_momentum_op(loss, alpha, beta1):
     """
-    Creates the training operation for a neural network in tensorflow
+    Creates the training operation for a neural network in tensorflow 1
 
     :param loss: loss of the network
 
