@@ -26,4 +26,3 @@ def moving_average(data, beta):
         moving_averages.append(w_new)
 
     return moving_averages
-
