@@ -22,9 +22,9 @@ def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
     :return: learning rate decay
     """
     learning_rate = tf.train.inverse_time_decay(learning_rate=alpha,
-                                               decay_rate=decay_rate,
-                                               global_step=global_step,
-                                               decay_steps=decay_step,
-                                               staircase=True)
+                                                decay_rate=decay_rate,
+                                                global_step=global_step,
+                                                decay_steps=decay_step,
+                                                staircase=True)
 
     return learning_rate
