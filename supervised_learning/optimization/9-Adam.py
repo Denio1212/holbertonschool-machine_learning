@@ -34,9 +34,9 @@ def update_variables_Adam(alpha, beta1, beta2, epsilon, var, grad, v, s, t):
     new_v = beta1 * v + (1 - beta1) * grad
     new_s = beta2 * s + (1 - beta2) * grad ** 2
 
-    v_fixed = v / (1 - beta1 ** t)
-    s_fixed = s / (1 - beta2 ** t)
+    v_fixed = new_v / (1 - beta1 ** t)
+    s_fixed = new_s / (1 - beta2 ** t)
 
-    updated = var - (alpha * (s_fixed / (np.sqrt(s_fixed) + epsilon)))
+    updated = var - (alpha * (v_fixed / (np.sqrt(s_fixed) + epsilon)))
 
     return updated, v_fixed, s_fixed
