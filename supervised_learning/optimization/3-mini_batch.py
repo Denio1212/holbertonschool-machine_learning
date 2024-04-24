@@ -3,8 +3,9 @@
 Trains a loaded neural network usning mini-batch gradient descent
 """
 
-shuffle_data = __import__('2-shuffle_data').shuffle_data
+
 import tensorflow.compat.v1 as tf
+shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 
 def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
@@ -84,6 +85,6 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                         print("\t\tCost: {}".format(step_cost))
                         print("\t\tAccuracy: {}".format(step_acc))
 
-    saved_model = new_saver.save(sess, save_path)
+        saved_model = new_saver.save(sess, save_path)
 
-    return saved_model
+        return saved_model
