@@ -3,7 +3,7 @@
 Batch Normalization in tensorflow 1.x
 """
 
-import numpy as np
+
 import tensorflow.compat.v1 as tf
 
 
