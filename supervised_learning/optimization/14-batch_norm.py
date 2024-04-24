@@ -3,7 +3,6 @@
 Batch Normalization in tensorflow 1.x
 """
 
-
 import tensorflow.compat.v1 as tf
 
 
@@ -23,10 +22,10 @@ def create_batch_norm_layer(prev, n, activation):
     """
     init = tf.keras.initializers.VarianceScaling(mode="fan_avg")
 
-    new_layer =tf.keras.layers.Dense(n,
-                                     activation=None,
-                                     kernel_initializer=init,
-                                     name="layer")
+    new_layer = tf.keras.layers.Dense(n,
+                                      activation=None,
+                                      kernel_initializer=init,
+                                      name="layer")
 
     x = new_layer(prev)
     mean, variance = tf.nn.moments(x, axes=[0])
