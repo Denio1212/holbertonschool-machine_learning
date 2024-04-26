@@ -18,17 +18,14 @@ def specificity(confusion):
     :return: specificity
     """
     num_classes = confusion.shape[0]
-    specificity = np.zeros((num_classes,))
 
     for i in range(num_classes):
-        t_posititve = confusion[i][i]
+        true_negatives = (np.sum(confusion) - np.sum(confusion, axis=0) -
+                          np.sum(confusion, axis=1) + np.diag(confusion))
 
-        f_positive = np.sum(confusion[:, i]) - t_posititve
+        false_positives = np.sum(confusion, axis=0) - np.diag(confusion)
 
-        f_negative = np.sum(confusion[i, :]) - t_posititve
+        specificity_per_class = true_negatives / (true_negatives +
+                                                  false_positives)
 
-        t_negative = np.sum(confusion) - (t_posititve - f_positive, f_negative)
-
-        specificity[i] = t_negative / (t_negative + f_positive)
-
-    return specificity
+        return specificity_per_class
