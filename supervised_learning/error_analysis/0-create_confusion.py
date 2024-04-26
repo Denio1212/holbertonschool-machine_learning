@@ -33,7 +33,7 @@ def create_confusion_matrix(labels, logits):
     """
     unique_classes = labels.shape[0]
     num_classes = labels.shape[1]
-    confusion_matrix = np.zeros((num_classes, num_classes), dtype=int)
+    confusion_matrix = np.zeros((num_classes, num_classes))
 
     for i in range(unique_classes):
         true_class = np.argmax(labels[i])
