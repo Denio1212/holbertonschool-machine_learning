@@ -21,9 +21,9 @@ def precision(confusion):
     precision = np.zeros((num_classes,))
 
     for i in range(num_classes):
-            t_positive = confusion[i, i]
-            f_positive = np.sum(confusion[:, i]) - t_positive
+        t_positive = confusion[i, i]
+        f_positive = np.sum(confusion[:, i]) - t_positive
 
-            precision[i] += t_positive / (t_positive + f_positive)
+        precision[i] += t_positive / (t_positive + f_positive)
 
     return precision
