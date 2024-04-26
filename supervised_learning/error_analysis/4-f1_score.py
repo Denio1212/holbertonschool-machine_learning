@@ -27,6 +27,6 @@ def f1_score(confusion):
 
     for i in range(num_classes):
         f_1[i] = ((2 * (precisions[i] * sensitivites[i]))
-               / (precisions[i] + sensitivites[i]))
+                  / (precisions[i] + sensitivites[i]))
 
     return f_1
