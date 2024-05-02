@@ -39,7 +39,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
 
         a = np.tanh(z)
 
-        mask = np.random.randn(a.shape) < keep_prob
+        dropout = np.random.binomial(1, keep_prob, size=A.shape)
         cache["D" + str(layer)] = mask
         a = np.multiply(a, mask)
 
