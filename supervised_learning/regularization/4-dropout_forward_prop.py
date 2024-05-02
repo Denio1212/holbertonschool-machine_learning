@@ -30,23 +30,24 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     All layers except the last should use the tanh activation function
     The last layer should use the softmax activation function
     """
-    outputs = {}
-    masks = {}
+    cache = {'A0': X}
 
     for layer in range(L - 1):
-        z = np.dot(X, weights["W" + str(layer + 1)])
+        z = (np.matmul(weights["W" + str(layer)],
+                       cache["A" + str(layer - 1)]) +
+             weights["b" + str(layer)])
 
         a = np.tanh(z)
 
         mask = np.random.randn(a.shape) < keep_prob
-        masked_a = a * mask
-        outputs["layer_" + str(layer + 1)] = masked_a
+        cache["D" + str(layer)] = mask
+        a = np.multiply(a, mask)
 
-        masks["mask_layer_" + str(layer + 1)] = mask
+        a /= keep_prob
+        cache["A" + str(layer)] = a
 
-    z = np.dot(outputs["layer" + str(L - 1)], weights["W" + str(L)])
-    a = np.exp(z) / np.sum(np.exp(z), axis=0, keepdims=True)
+    z = (np.matmul(weights["W" + str(L)], cache["A" + str(L - 1)]) +
+         weights["b" + str(L - 1)])
+    a = np.exp(z) / np.sum(np.exp(z), axis=0)
 
-    outputs["output"] = a
-
-    return outputs, masks
+    return cache
