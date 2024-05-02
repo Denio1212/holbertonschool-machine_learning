@@ -4,7 +4,6 @@ Creates a layer in tensorflow 1 that includes a
 l2 regularization parameter.
 """
 
-
 import tensorflow.compat.v1 as tf
 
 
@@ -25,10 +24,10 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
     regualizer = tf.keras.regularizers.l2(lambtha)
     init = tf.keras.initializers.Variancescaling(scale=2.0, mode="fan_avg")
 
-    l2_layer = tf.layers.dense(n, activation=activation,
-                               kernel_initializer=init,
-                               kernel_regularizer=regualizer,
-                               name='layer')
+    l2_layer = (tf.layers.dense(n, activation=activation,
+                                kernel_initializer=init,
+                                kernel_regularizer=regualizer,
+                                name='layer'))
     output = l2_layer(prev)
 
     return output
