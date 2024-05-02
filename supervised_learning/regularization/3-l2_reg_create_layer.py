@@ -5,6 +5,7 @@ l2 regularization parameter.
 """
 
 import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 
 def l2_reg_create_layer(prev, n, activation, lambtha):
