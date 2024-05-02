@@ -15,7 +15,7 @@ def l2_reg_cost(cost):
 
     :return: L2 regularization cost in a tensor parameter
     """
-    l2_reg = tf.losses.get_regularization_loss()
+    l2_reg = tf.losses.get_regularization_losses()
 
     l2_reg_costs = cost + l2_reg
 
