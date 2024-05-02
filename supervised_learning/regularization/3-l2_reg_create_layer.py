@@ -22,8 +22,10 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
 
     :return: new layer output
     """
+    regualizer = tf.keras.regularizers.l2(lambtha)
+
     l2_layer = tf.layers.dense(n, activation=activation,
-                               kernel_regularizer=lambtha,
+                               kernel_regularizer=regualizer,
                                name='layer')
     output = l2_layer(prev)
 
