@@ -23,6 +23,8 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
     :return: new layer output
     """
     l2_layer = tf.layers.dense(n, activation=activation,
-                               kernel_regularizer=lambtha)(prev)
+                               kernel_regularizer=lambtha,
+                               name='layer')
+    output = l2_layer(prev)
 
-    return l2_layer
+    return output
