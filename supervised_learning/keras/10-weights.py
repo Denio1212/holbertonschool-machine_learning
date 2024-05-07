@@ -19,17 +19,16 @@ def save_weights(network, filename, save_format='h5'):
 
     :return: None
     """
-    network.save_weights(filename=filename, save_format=save_format)
+    network.save_weights(filepath=filename,
+                         save_format=save_format)
 
+    def load_weights(network, filename):
+        """
+            function that loads a model's weights
 
-def load_weights(network, filename):
-    """
-    Load weights
+            :param network: model to which the weights should be loaded
+            :param filename: path of the file where weights to be loaded
 
-    :param network: keras model whose weights will be loaded
-
-    :param filename: path to load weights
-
-    :return: None
-    """
-    network.load_weights(filename=filename)
+            :return: None
+        """
+        network.load_weights(filepath=filename)
