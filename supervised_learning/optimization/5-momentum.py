@@ -1,32 +1,26 @@
 #!/usr/bin/env python3
 """
-Updates a variable using a gradient descent algorithm with momentum
-optimization.
+   Momentum
 """
-
-
-import numpy as np
 
 
 def update_variables_momentum(alpha, beta1, var, grad, v):
     """
-    Updates a variable using a gradient descent algorithm with momentum
-    optimization.
+        method that updates a variable using the gradient descent
+        with momentum optimization algorithm
 
-    :param alpha: learning rate
+        :param alpha: learning rate
+        :param beta1: momentum weight
+        :param var: ndarray, variable to be updated
+        :param grad: ndarray, gradient of var
+        :param v: previous first moment of var
 
-    :param beta1: momentum weight
-
-    :param var: variable to update
-
-    :param grad: gradient of var
-
-    :param v: previous first movement
-
-    :return: updated variable and new movement
+        :return: updated variable and the new moment
     """
+    # formula for momentum
     dW = beta1 * v + (1 - beta1) * grad
 
+    # update var
     var_new = var - dW * alpha
 
-    return var_new, grad
+    return var_new, dW
