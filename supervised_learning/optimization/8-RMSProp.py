@@ -1,32 +1,30 @@
 #!/usr/bin/env python3
 """
-Creates the RMSProp training operation for neural network using tensorflow 1
+   RMSProp upgraded
 """
-
 
 import tensorflow.compat.v1 as tf
 
 
 def create_RMSProp_op(loss, alpha, beta2, epsilon):
     """
-    Updates the RMSProp weights using gradient descent
+        Method tha create the training operation for NN
+        in tf using RMSProp optimization algo
 
-    :param alpha: learning rate
+        :param loss: loss of NN
+        :param alpha: learning rate
+        :param beta2: RMSProp weight
+        :param epsilon: small number to avoid divsion by zero
 
-    :param beta2: RMSProp weight
-
-    :param epsilon: avoid division by zero
-
-    :param var: variable to update
-
-    :param grad: gradient of var
-
-    :param s: previous second moment of var
-
-    :return: updated var and the new moment
+        :return: RMSProp optimization operation
     """
-    optimiser = tf.train.RMSPropOptimizer(learning_rate=alpha,
-                                          decay=beta2, epsilon=epsilon)
-    train_op = optimiser.minimize(loss)
+
+    # set optimizer taht implement Momentum algo in tf
+    optimizer = tf.train.RMSPropOptimizer(learning_rate=alpha,
+                                          decay=beta2,
+                                          epsilon=epsilon)
+
+    # train_op to minimize loss with this optimizer
+    train_op = optimizer.minimize(loss)
 
     return train_op
