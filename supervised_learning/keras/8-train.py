@@ -48,33 +48,44 @@ def train_model(network, data, labels, batch_size,
 
     :return: history of the model
     """
-    callbacks = []
-    if early_stopping and validation_data:
-        callbacks = [keras.callbacks.EarlyStopping(monitor='val_loss',
-                                                   patience=patience)]
-    else:
-        callbacks = None
+    callback = []
+    if early_stopping is True and validation_data is not None:
+        early_stop = K.callbacks.EarlyStopping(monitor='val_loss',
+                                               patience=patience)
+
+        # add to callback list
+        callback.append(early_stop)
+
     if learning_rate_decay and validation_data:
-        def learn_schedule(epochs):
-            learning_rate = alpha / (1 + decay_rate * epochs)
-            return learning_rate
+        # function calculate new learning rate
+        def scheduler(epochs):
+            lr = alpha / (1 + decay_rate * epochs)
+            return lr
 
-        callbacks = [keras.callbacks.LearningRateScheduler(learn_schedule,
-                                                           verbose=1)]
+        inv_time_decay = K.callbacks.LearningRateScheduler(
+            scheduler,
+            verbose=1)
+
+        # add to callback list
+        callback.append(inv_time_decay)
+
+    # save best model
     if save_best:
-        checkpoint_best = keras.callbacks.ModelCheckpoint(filepath=filepath,
-                                                          monitor='val_loss',
-                                                          save_best_only=True)
-        callbacks.append(checkpoint_best)
+        save_best_model = K.callbacks.ModelCheckpoint(
+            filepath=filepath,
+            monitor='val_loss',
+            save_best_only=True
+        )
 
-    history = network.fit(
-        x=data,
-        y=labels,
-        batch_size=batch_size,
-        epochs=epochs,
-        validation_data=validation_data,
-        callbacks=[callbacks],
-        verbose=verbose,
-        shuffle=shuffle
-    )
+        callback.append(save_best_model)
+
+    history = network.fit(x=data,
+                          y=labels,
+                          epochs=epochs,
+                          batch_size=batch_size,
+                          validation_data=validation_data,
+                          callbacks=[callback],
+                          verbose=verbose,
+                          shuffle=shuffle)
+
     return history
