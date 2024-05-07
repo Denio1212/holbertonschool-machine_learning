@@ -1,29 +1,31 @@
 #!/usr/bin/env python3
 """
-Creates the training program for a neural network in tensorflow 1
-with the adam optimizer
+   Adam upgraded
 """
-
 
 import tensorflow.compat.v1 as tf
 
 
 def create_Adam_op(loss, alpha, beta1, beta2, epsilon):
     """
-    Creates the training program for a neural network in tensorflow 1
-    with the adam optimizer
+        Method that creates training op for NN
+        in tf using Adam optimization algo
 
-    :param loss: the loss function
+        :param loss: loss of NN
+        :param alpha: learning rate
+        :param beta1: weight used for firs moment
+        :param beta2: weight used for second moment
+        :param epsilon: small number to avoid division by 0
 
-    :param alpha: the learning rate
-
-    :param beta1:  weight used for the first moment
-
-    :param beta2:  weight used for the second moment
-
-    :param epsilon: avoid division by zero
-
-    :return: the training program for the adam optimizer
+        :return: Adam optimization operation
     """
-    return tf.train.AdamOptimizer(learning_rate=alpha, beta1=beta1,
-                                  beta2=beta2, epsilon=epsilon).minimize(loss)
+    # set optimizer that implement Adam algo in tf
+    optimizer = tf.train.AdamOptimizer(learning_rate=alpha,
+                                       beta1=beta1,
+                                       beta2=beta2,
+                                       epsilon=epsilon)
+
+    # train_op to minimize loss with this optimizer
+    train_op = optimizer.minimize(loss)
+
+    return train_op
