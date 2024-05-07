@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Batch Normalization in tensorflow 1.x
+   Batch Normalization upgraded
 """
 
 import tensorflow.compat.v1 as tf
@@ -8,33 +8,41 @@ import tensorflow.compat.v1 as tf
 
 def create_batch_norm_layer(prev, n, activation):
     """
-    Create batch normalization layer for neural network
+        Method that creates a batch normalization layer for a
+        NN in tf
 
-    :param prev: previous layer
+        :param prev: activated output of the previous layer
+        :param n: number of nodes in the layer to be created
+        :param activation: activation function for output layer
 
-    :param n: number of nodes to be created
-
-    :param activation: activation function
-
-    beta and gama are two trainable params
-
-    :return: batch normalization layer
+        :return: tensor of activated output for the layer
     """
-    init = tf.keras.initializers.VarianceScaling(mode="fan_avg")
+    # set initialization to He et. al
+    initializer = tf.keras.initializers.VarianceScaling(mode='fan_avg')
 
-    new_layer = tf.keras.layers.Dense(n,
-                                      activation=None,
-                                      kernel_initializer=init,
-                                      name="layer")
+    # create layer Dense with parameters
+    new_layer = tf.layers.Dense(n,
+                                activation=None,
+                                kernel_initializer=initializer,
+                                name="layer")
 
+    # apply layer to input
     x = new_layer(prev)
     mean, variance = tf.nn.moments(x, axes=[0])
 
-    beta = tf.Variable(tf.zeros([n]), name="beta")
-    gamma = tf.Variable(tf.ones([n]), name="gamma")
+    # beta and gamma : two trainable parameters
+    gamma = tf.Variable(tf.ones([n]), name='gamma')
+    beta = tf.Variable(tf.zeros([n]), name='beta')
 
     epsilon = 1e-8
 
-    x_norm = tf.nn.batch_normalization(x, mean, variance, beta, gamma, epsilon)
+    # apply batch normalization
+    x_norm = tf.nn.batch_normalization(
+        x=x,
+        mean=mean,
+        variance=variance,
+        offset=beta,
+        scale=gamma,
+        variance_epsilon=epsilon)
 
     return activation(x_norm)
