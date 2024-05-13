@@ -6,7 +6,7 @@
 import tensorflow.keras as keras
 
 
-def lenet(X):
+def lenet5(X):
     """
     LeNet-5 (Keras implementation)
 
