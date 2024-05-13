@@ -28,7 +28,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
         :return: path where model was saved
     """
 
-    # metagraph and restore session
+    # metagraph and restore sessions
     with tf.Session() as sess:
         new_saver = tf.train.import_meta_graph(load_path + ".meta")
         new_saver.restore(sess, load_path)
