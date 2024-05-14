@@ -37,16 +37,16 @@ def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
     out_height = int((h_prev - kh) / sh + 1)
     out_width = int((w_prev - kw) / sw + 1)
 
-    Pooled = np.zeros((m, h_prev, w_prev, c_prev))
+    Pooled = np.zeros((m, out_height, out_width, c_prev))
 
     for i in range(out_height):
         for j in range(out_width):
             image_zone = A_prev[:, i * sh:i * sh + kh,
-                         j * sw:j * sw + kw, :]
+                                j * sw:j * sw + kw, :]
 
             if mode == 'max':
                 Pooled[:, i, j, :] = np.max(image_zone, axis=(1, 2))
             elif mode == 'avg':
-                Pooled[:, i, j, :] = np.mean(image_zone, axis=(1, 2))
+                Pooled[:, i, j, :] = np.average(image_zone, axis=(1, 2))
 
     return Pooled
