@@ -41,8 +41,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
         ph = 0
         pw = 0
     elif padding == "same":
-        ph = (((h_prev - 1) * sh + kh - h_prev) / 2)
-        pw = (((w_prev - 1) * sw + kw - w_prev) / 2)
+        ph = int(((h_prev - 1) * sh + kh - h_prev) / 2)
+        pw = int(((w_prev - 1) * sw + kw - w_prev) / 2)
 
     out_height = int((h_prev - kh + 2 * ph) / sh) + 1
     out_width = int((w_prev - kw + 2 * pw) / sw) + 1
@@ -57,7 +57,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
             for w in range(out_width):
                 # extract region from each image
                 image_zone = A_prev_padded[:, h * sh:h * sh + kh,
-                             w * sw:w * sw + kw, :]
+                                           w * sw:w * sw + kw, :]
 
                 # element wize multiplication
                 Z[:, h, w, k] = np.sum(image_zone
