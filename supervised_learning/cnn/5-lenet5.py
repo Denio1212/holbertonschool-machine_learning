@@ -24,7 +24,7 @@ def lenet5(X):
         he_normal initialization
         activation : relu
 
-        :return: K.Model compiled to use Adam optmization and accuracy metrics
+        :return: K.Model compiled to use Adam optimization and accuracy metrics
     """
 
     # intializer
