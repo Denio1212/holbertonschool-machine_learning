@@ -174,7 +174,7 @@ def inception_network():
 
     x = keras.layers.GlobalAveragePooling2D(name="global_avg_pool")(x)
 
-    x = drop(0, 4)(x)
+    x = drop(0, 0.4)(x)
 
     x = dense(10, activation='softmax', name="main_output")(x)
 
