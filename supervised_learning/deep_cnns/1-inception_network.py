@@ -1,183 +1,81 @@
 #!/usr/bin/env python3
 """
-makes the Google inception architecture
-using the inception block made previously
+Defines a function that builds an inception network
+using Keras model
 """
 
 
-import tensorflow.keras as keras
+import tensorflow.keras as K
 inception_block = __import__('0-inception_block').inception_block
 
 
 def inception_network():
     """
-    Makes the Google Inception Network
-
-    The input shape is (224, 224, 3)
-
-    Returns: The keras model
+    Builds an inception network using Keras model
     """
-    dense = keras.layers.Dense
-    conv = keras.layers.Conv2D
-    max_pool = keras.layers.MaxPooling2D
-    inception = inception_block
-    avg_pool = keras.layers.AveragePooling2D
-    drop = keras.layers.Dropout
+    init = K.initializers.he_normal()
+    activation = K.activations.relu
+    img_input = K.Input(shape=(224, 224, 3))
 
-    input_layer = keras.layers.Input(shape=(224, 224, 3))
+    C0 = K.layers.Conv2D(filters=64,
+                         kernel_size=(7, 7),
+                         padding='same',
+                         strides=(2, 2),
+                         activation=activation,
+                         kernel_initializer=init)(img_input)
 
-    x = conv(
-        filters=64,
-        kernel_size=(7, 7),
-        padding='same',
-        strides=(2, 2),
-        activation='relu',
-        name='conv_start',
-    )(input_layer)
+    MP1 = K.layers.MaxPooling2D(pool_size=(3, 3),
+                                strides=(2, 2),
+                                padding='same')(C0)
 
-    x = max_pool(
-        (3, 3),
-        strides=(2, 2),
-        padding='same',
-        name='max_pool_1',
-    )(x)
+    C2 = K.layers.Conv2D(filters=64,
+                         kernel_size=(1, 1),
+                         padding='same',
+                         strides=(1, 1),
+                         activation=activation,
+                         kernel_initializer=init)(MP1)
 
-    x = conv(
-        filters=64,
-        kernel_size=(1, 1),
-        padding='same',
-        strides=(1, 1),
-        activation='relu',
-        name="conv_pre_3x3"
-    )(x)
+    C3 = K.layers.Conv2D(filters=192,
+                         kernel_size=(3, 3),
+                         padding='same',
+                         strides=(1, 1),
+                         activation=activation,
+                         kernel_initializer=init)(C2)
 
-    x = conv(
-        filters=192,
-        kernel_size=(3, 3),
-        padding='same',
-        strides=(1, 1),
-        activation='relu',
-        name="conv_3x3"
-    )(x)
+    MP4 = K.layers.MaxPooling2D(pool_size=(3, 3),
+                                strides=(2, 2),
+                                padding='same')(C3)
 
-    x = max_pool(
-        (3, 3),
-        strides=(2, 2),
-        padding='same',
-        name='max_pool_2',
-    )(x)
+    I5 = inception_block(MP4, [64, 96, 128, 16, 32, 32])
+    I6 = inception_block(I5, [128, 128, 192, 32, 96, 64])
 
-    x = inception_block(
-        x,
-        [64, 96, 128, 16, 32, 32],
-    )
+    MP7 = K.layers.MaxPooling2D(pool_size=(3, 3),
+                                strides=(2, 2),
+                                padding='same')(I6)
 
-    x = inception_block(
-        x,
-        [128, 128, 192, 32, 96, 64],
-    )
+    I8 = inception_block(MP7, [192, 96, 208, 16, 48, 64])
+    I9 = inception_block(I8, [160, 112, 224, 24, 64, 64])
+    I10 = inception_block(I9, [128, 128, 256, 24, 64, 64])
+    I11 = inception_block(I10, [112, 144, 288, 32, 64, 64])
+    I12 = inception_block(I11, [256, 160, 320, 32, 128, 128])
 
-    x = max_pool(
-        (3, 3),
-        strides=(2, 2),
-        padding='same',
-        name='max_pool_inception_1',
-    )(x)
+    MP13 = K.layers.MaxPooling2D(pool_size=(3, 3),
+                                 strides=(2, 2),
+                                 padding='same')(I12)
 
-    x = inception_block(
-        x,
-        [192, 96, 208, 16, 48, 64],
-    )
+    I14 = inception_block(MP13, [256, 160, 320, 32, 128, 128])
+    I15 = inception_block(I14, [384, 192, 384, 48, 128, 128])
 
-    x1 = avg_pool(
-        (5, 5),
-        strides=3
-    )(x)
+    AP16 = K.layers.AveragePooling2D(pool_size=(7, 7),
+                                     strides=(1, 1),
+                                     padding='valid')(I15)
 
-    x1 = conv(
-        filters=128,
-        kernel_size=(1, 1),
-        padding='same',
-        activation='relu',
-    )(x1)
+    Dropout17 = K.layers.Dropout(rate=0.4)(AP16)
 
-    x1 = keras.layers.Flatten()(x1)
+    output = K.layers.Dense(1000,
+                            activation='softmax',
+                            kernel_initializer=init)(Dropout17)
 
-    x1 = dense(
-        1024,
-        activation='relu',
-    )(x1)
+    model = K.Model(inputs=img_input, outputs=output)
 
-    x1 = drop(0.7)(x1)
-
-    x1 = dense(10, activation='softmax', name="aux_output_1")(x1)
-
-    x = inception_block(
-        x,
-        [160, 112, 224, 24, 64, 64],
-    )
-
-    x = inception_block(
-        x,
-        [128, 128, 256, 24, 64, 64],
-    )
-
-    x = inception_block(
-        x,
-        [112, 144, 288, 32, 64, 64],
-    )
-
-    x2 = avg_pool(
-        (5, 5),
-        strides=3
-    )(x)
-
-    x2 = conv(
-        filters=128,
-        kernel_size=(1, 1),
-        padding="same",
-        activation="relu"
-    )(x2)
-
-    x2 = keras.layers.Flatten()(x2)
-
-    x2 = dense(
-        1024,
-        activation="relu"
-    )(x2)
-
-    x2 = drop(0.7)(x2)
-
-    x2 = dense(10, activation='softmax', name="aux_output_2")(x2)
-
-    x = inception_block(
-        x,
-        [256, 160, 320, 32, 128, 128],
-    )
-
-    x = max_pool(
-        (3, 3),
-        strides=(2, 2),
-        padding='same',
-        name='max_pool_inception_2',
-    )(x)
-
-    x = inception_block(
-        x,
-        [384, 192, 384, 48, 128, 128],
-    )
-
-    x = inception_block(
-        x,
-        [384, 192, 384, 48, 128, 128],
-    )
-
-    x = keras.layers.GlobalAveragePooling2D(name="global_avg_pool")(x)
-
-    x = drop(0, 0.4)(x)
-
-    x = dense(10, activation='softmax', name="main_output")(x)
-
-    keras_model = keras.models.Model(inputs=input_layer, outputs=x)
-
-    return keras_model
+    return model
