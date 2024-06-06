@@ -3,7 +3,7 @@
 Makes the Projection blocks of the ResNet Architecture
 """
 
-import tensorflow.keras as keras
+import keras
 
 
 def projection_block(A_prev, filters, s=2):
