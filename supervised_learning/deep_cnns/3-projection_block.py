@@ -3,7 +3,7 @@
 Makes the Projection blocks of the ResNet Architecture
 """
 
-from tensorflow import keras
+from tensorflow import keras as K
 
 
 def projection_block(A_prev, filters, s=2):
@@ -28,9 +28,9 @@ def projection_block(A_prev, filters, s=2):
     Returns: Activated output of the block.
     """
     F11, F3, F12 = filters
-    initializer = keras.initializers.he_normal(seed=0)
-    activation = keras.activations.relu
-    layers = keras.layers
+    initializer = K.initializers.he_normal(seed=0)
+    activation = K.activations.relu
+    layers = K.layers
     batch = layers.BatchNormalization
 
     Conv_1x1 = layers.Conv2D(
