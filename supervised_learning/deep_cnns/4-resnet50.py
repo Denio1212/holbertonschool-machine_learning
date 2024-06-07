@@ -3,6 +3,7 @@
 Makes the ResNet Architecture
 """
 
+
 from tensorflow import keras
 identity_block = __import__('2-identity_block').identity_block
 projection_block = __import__('3-projection_block').projection_block
