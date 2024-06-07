@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+"""
+Makes the dense blocks
+"""
+
+from tensorflow import keras as K
+
+
 def dense_block(X, nb_filters, growth_rate, layers):
     """Builds a Dense Block.
 
