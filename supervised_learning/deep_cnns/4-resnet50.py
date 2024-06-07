@@ -4,6 +4,7 @@ Makes the ResNet Architecture
 """
 
 from tensorflow import keras
+
 identity_block = __import__('2-identity_block').identity_block
 projection_block = __import__('3-projection_block').projection_block
 
@@ -22,7 +23,7 @@ def resnet50():
 
     Returns: Keras Model
     """
-    init = keras.initializers.he_normal(seed=0)
+    init = keras.initializers.he_normal()
     activation = keras.activations.relu
     input = keras.Input(shape=(224, 224, 3))
     layers = keras.layers
@@ -31,6 +32,7 @@ def resnet50():
         64,
         (7, 7),
         strides=(2, 2),
+        padding='same',
         kernel_initializer=init,
     )(input)
     start_batch = layers.BatchNormalization(axis=3)(start)
@@ -42,7 +44,7 @@ def resnet50():
         padding='same',
     )(start_relu))
 
-    project_1 = projection_block(start_relu, [128, 128, 512], s=1)
+    project_1 = projection_block(start_relu, [64, 64, 256], s=1)
     identity_1 = identity_block(
         project_1,
         [64, 64, 256],
@@ -52,7 +54,7 @@ def resnet50():
         [64, 64, 256],
     )
 
-    project_2 = projection_block(identity_2, [64, 64, 256], s=2)
+    project_2 = projection_block(identity_2, [128, 128, 512], s=2)
     identity_2_1 = identity_block(
         project_2,
         [128, 128, 512]
