@@ -18,7 +18,8 @@ def identity_block(A_prev, filters):
     F3 - filter size for 3x3 convolution
     F22 - filter for second 1z1 convolution
 
-    All convolutions will be followed by Batch normalization, and ReLU activation.
+    All convolutions will be followed by Batch normalization,
+    and ReLU activation.
 
     All weights will use normal initialization.
 
