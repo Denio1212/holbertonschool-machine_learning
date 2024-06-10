@@ -112,6 +112,6 @@ def resnet50():
         kernel_initializer=init,
     )(average_pooling)
 
-    model = keras.models.Model(inputs=input, outputs=output)
+    model = K.models.Model(inputs=input, outputs=output)
 
     return model
