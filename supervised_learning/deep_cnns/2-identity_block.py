@@ -24,7 +24,7 @@ def identity_block(A_prev, filters):
     Returns: Activated output of the block.
     """
     F11, F3, F12 = filters
-    initializer = keras.initializers.he_normal()
+    initializer = keras.initializers.he_normal(seed=0)
     activation = keras.activations.relu
 
     layers = keras.layers
