@@ -1,63 +1,62 @@
 #!/usr/bin/env python3
 """
-Defines a function that builds an identity block using Keras
+Makes the ResNet model identity block.
 """
 
-from tensorflow import keras as K
+import tensorflow.keras as keras
 
 
 def identity_block(A_prev, filters):
     """
-    Builds an identity block using Keras
+    Identity block function.
 
-    parameters:
-        A_prev: output from the previous layer
-        filters [tuple or list]:
-            containing F11, F3, F12, respectively
+    :param A_prev: output of the previous layer.
 
-    F11: number of filters in the first 1x1 convolution
-    F3: number of filters in the 3x3 convolution
-    F12: number of filters in the second 1x1 convolution
+    :param filters: number of filters in tuple form carrying:
+    F11 - filter for 1x1 convolution
+    F3 - filter size for 3x3 convolution
+    F22 - filter for second 1z1 convolution
 
-    All convolutions inside the identity block should
-    be followed by batch normalization along the channels axis
-    and then ReLU activation, respectively
+    All convolutions will be followed by Batch normalization, and ReLU activation.
 
-    All weights should be initialized using he normal
+    All weights will use normal initialization.
 
-    returns:
-        the activated output of the identity block
+    Returns: Activated output of the block.
     """
-
     F11, F3, F12 = filters
-    init = K.initializers.he_normal()
-    activation = K.activations.relu
+    initializer = keras.initializers.he_normal()
+    activation = keras.activations.relu
 
-    C11 = K.layers.Conv2D(filters=F11,
-                          kernel_size=(1, 1),
-                          padding='same',
-                          kernel_initializer=init)(A_prev)
+    layers = keras.layers
 
-    Batch_Norm11 = K.layers.BatchNormalization(axis=3)(C11)
-    ReLU11 = K.layers.Activation(activation)(Batch_Norm11)
+    Conv_1x1 = layers.Conv2D(
+        F11,
+        (1, 1),
+        padding='same',
+        kernel_initializer=initializer,
+    )(A_prev)
+    Batch_1x1 = layers.BatchNormalization(axis=3)(Conv_1x1)
+    ReLU_1x1 = layers.Activation(activation)(Batch_1x1)
 
-    C3 = K.layers.Conv2D(filters=F3,
-                         kernel_size=(3, 3),
-                         padding='same',
-                         kernel_initializer=init)(ReLU11)
+    Conv_3x3 = layers.Conv2D(
+        F3,
+        (3, 3),
+        padding='same',
+        kernel_initializer=initializer,
+    )(ReLU_1x1)
+    Batch_3x3 = layers.BatchNormalization(axis=3)(Conv_3x3)
+    ReLU_3x3 = layers.Activation(activation)(Batch_3x3)
 
-    Batch_Norm3 = K.layers.BatchNormalization(axis=3)(C3)
-    ReLU3 = K.layers.Activation(activation)(Batch_Norm3)
+    Conv_1x1_2 = layers.Conv2D(
+        F12,
+        (1, 1),
+        padding='same',
+        kernel_initializer=initializer,
+    )(ReLU_3x3)
+    Batch_1x1_2 = layers.BatchNormalization(axis=3)(Conv_1x1_2)
 
-    C12 = K.layers.Conv2D(filters=F12,
-                          kernel_size=(1, 1),
-                          padding='same',
-                          kernel_initializer=init)(ReLU3)
+    pre_output = layers.Add()([Batch_1x1_2, A_prev])
 
-    Batch_Norm12 = K.layers.BatchNormalization(axis=3)(C12)
-
-    Addition = K.layers.Add()([Batch_Norm12, A_prev])
-
-    output = K.layers.Activation(activation)(Addition)
+    output = layers.Activation(activation)(pre_output)
 
     return output
