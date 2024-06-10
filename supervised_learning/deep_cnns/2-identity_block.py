@@ -3,7 +3,7 @@
 Makes the ResNet model identity block.
 """
 
-import tensorflow.keras as keras
+from tensorflow import keras
 
 
 def identity_block(A_prev, filters):
