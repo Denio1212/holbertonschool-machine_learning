@@ -4,7 +4,7 @@ Makes the ResNet Architecture
 """
 
 
-from tensorflow import keras
+from tensorflow import keras as K
 identity_block = __import__('2-identity_block').identity_block
 projection_block = __import__('3-projection_block').projection_block
 
@@ -23,10 +23,10 @@ def resnet50():
 
     Returns: Keras Model
     """
-    init = keras.initializers.he_normal()
-    activation = keras.activations.relu
-    input = keras.Input(shape=(224, 224, 3))
-    layers = keras.layers
+    init = K.initializers.he_normal()
+    activation = K.activations.relu
+    input = K.Input(shape=(224, 224, 3))
+    layers = K.layers
 
     start = layers.Conv2D(
         64,
