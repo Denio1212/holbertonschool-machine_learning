@@ -3,7 +3,7 @@
 Makes the ResNet model identity block.
 """
 
-from tensorflow import keras
+from tensorflow import keras as K
 
 
 def identity_block(A_prev, filters):
@@ -24,10 +24,10 @@ def identity_block(A_prev, filters):
     Returns: Activated output of the block.
     """
     F11, F3, F12 = filters
-    initializer = keras.initializers.he_normal(seed=0)
-    activation = keras.activations.relu
+    initializer = K.initializers.he_normal(seed=0)
+    activation = K.activations.relu
 
-    layers = keras.layers
+    layers = K.layers
 
     Conv_1x1 = layers.Conv2D(
         F11,
