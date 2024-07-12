@@ -16,7 +16,7 @@ class RNNCell:
             Key concept: an RNN cell uses both the current input
             and the previous hidden state to determine the next hidden state
 
-            The concatenation of the input data and hidden state allows the cell
+            The concatenation of the input data and hidden data
             to process the combined information together
         """
         self.Wh = np.random.normal(size=(i + h, h))
@@ -31,7 +31,7 @@ class RNNCell:
 
         def softmax(x):
             """
-            computes the softmax activation, used to convert the output logits into probabilities
+            computes the softmax activation, used to convert the output logits
             """
             return np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
 
@@ -42,4 +42,3 @@ class RNNCell:
         output_t = softmax(np.dot(h_next, self.Wy) + self.by)
 
         return h_next, output_t
-
