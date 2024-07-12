@@ -8,28 +8,16 @@ import numpy as np
 
 class RNNCell:
     """
-    RNN cell class
+        Represents a cell of a simple RNN:
     """
 
     def __init__(self, i, h, o):
         """
-        RNN cell constructor
+            Key concept: an RNN cell uses both the current input
+            and the previous hidden state to determine the next hidden state
 
-        :param i: dimension of data
-
-        :param h: dimension of hidden state
-
-        :param o: dimension of output state
-
-        Creates public instance attributes:
-        Wh, Wy, bh, by
-
-        (Wh, Wy) are for the concatenated hidden state and input data
-        (bh, by) are for the output
-
-        The weights will be initialized using random normal initialization
-
-        The biases will be 0
+            The concatenation of the input data and hidden state allows the cell
+            to process the combined information together
         """
         self.Wh = np.random.normal(size=(i + h, h))
         self.Wy = np.random.normal(size=(h, o))
@@ -38,29 +26,20 @@ class RNNCell:
 
     def forward(self, h_prev, x_t):
         """
-        Performs forward pass of the RNN cell in one step
-
-        :param x_t: numpy array of shape (m, i) that contains input
-        for the cell
-
-        :param h_prev: numpy array of shape (m, h) that contains hidden
-        data
-
-        -> m is the batch size of the data
+            Performs forward propagation for one time step
         """
 
         def softmax(x):
             """
-            computes the softmax activation function
-
-            :param x: input
+            computes the softmax activation, used to convert the output logits into probabilities
             """
-            return np.exp(x) / np.sum(np.exp(x), axis=0, keepdims=True)
+            return np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
 
         h_x = np.concatenate((h_prev, x_t), axis=1)
 
         h_next = np.tanh(np.dot(h_x, self.Wh) + self.bh)
 
-        output_tanh = softmax(np.dot(h_next, self.Wy) + self.by)
+        output_t = softmax(np.dot(h_next, self.Wy) + self.by)
 
-        return h_next, output_tanh
+        return h_next, output_t
+
