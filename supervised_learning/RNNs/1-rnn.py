@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 """
 A cell that performs forward propagation of a simple RNN
 """
