@@ -63,24 +63,27 @@ class GRUCell:
         h_next -> the next hidden state
         y -> the output of the cell
         """
-
         def softmax(x):
-            """
-            computes the softmax activation function
-            """
-            return np.exp(x) / np.sum(np.exp(x), axis=0, keepdims=True)
+            """Compute softmax activation function"""
+            return np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
 
         h_x = np.concatenate((h_prev, x_t), axis=1)
 
+        # Compute Reset Gate
         r_t = 1 / (1 + np.exp(-(np.dot(h_x, self.Wr) + self.br)))
 
+        # Compute Update Gate
         z_t = 1 / (1 + np.exp(-(np.dot(h_x, self.Wz) + self.bz)))
 
+        # Compute Candidate Hidden State
         rh_x = np.concatenate((r_t * h_prev, x_t), axis=1)
-        h_tilde = np.tanh(np.dot(rh_x, self.Wh) + self.bh)
+        h_tilde = np.tanh(
+            np.dot(rh_x, self.Wh) + self.bh)
 
+        # Compute Next Hidden State
         h_next = (1 - z_t) * h_prev + z_t * h_tilde
 
-        output = softmax(np.dot(h_next, self.Wy) + self.by)
+        # Compute Output
+        output_t = softmax(np.dot(h_next, self.Wy) + self.by)
 
-        return h_next, output
+        return h_next, output_t
