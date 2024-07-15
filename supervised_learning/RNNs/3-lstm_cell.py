@@ -32,7 +32,8 @@ class LSTMCell:
         (Wo, bo) -> are for the output gate
         (Wy, by) -> are for the outputs
 
-        The weights should be initialized using a random normal distribution in the order listed above
+        The weights should be initialized using a
+        random normal distribution in the order listed above
 
         The weights will be used on the right side for matrix multiplication
 
