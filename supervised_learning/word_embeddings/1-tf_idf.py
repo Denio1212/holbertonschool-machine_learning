@@ -3,7 +3,6 @@
 Function to create tf-idf embedding matrix
 """
 
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 
@@ -31,6 +30,5 @@ def tf_idf(sentences, vocab=None):
     tfid_matrix = vector.fit_transform(sentences)
     embeddings = tfid_matrix.toarray()
     feature_names = vector.get_feature_names_out()
-
 
     return embeddings, feature_names
