@@ -14,5 +14,3 @@ def gensim_to_keras(model):
         Keras Embedding layer
     """
     return model.wv.get_keras_embedding(True)
-
-
