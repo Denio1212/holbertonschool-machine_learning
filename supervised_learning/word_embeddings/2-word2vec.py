@@ -32,25 +32,6 @@ def word2vec_model(sentences, size=100, min_count=5, window=5,
 
         workers (int): number of parallel worker threads to train the model
     """
-    if cbow is True:
-        cbow_flag = 0
-    else:
-        cbow_flag = 1
-
-    model = Word2Vec(
-        sentences,
-        size,
-        min_count,
-        window,
-        negative,
-        sg=cbow_flag,
-        iter=iterations,
-        seed=seed,
-        workers=workers
-    )
-
-    model.train(sentences, total_examples=model.corpus_count,
-                epochs=model.epochs)
-
-    return model
-
+    return Word2Vec(sentences=sentences, size=size, min_count=min_count,
+                    window=window, negative=negative, iter=iterations,
+                    seed=seed, workers=workers, sg=not cbow)
