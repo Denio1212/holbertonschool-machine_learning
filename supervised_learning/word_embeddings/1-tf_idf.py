@@ -29,6 +29,6 @@ def tf_idf(sentences, vocab=None):
 
     tfid_matrix = vector.fit_transform(sentences)
     embeddings = tfid_matrix.toarray()
-    feature_names = vector.get_feature_names_out()
+    feature_names = vector.get_feature_names()
 
     return embeddings, feature_names
