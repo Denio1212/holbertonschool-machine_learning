@@ -19,6 +19,8 @@ def uni_bleu(references, sentence):
 
     Returns:
         unigram BLEU score
+
+    BP is belief propagation
     """
     BP = min(1, np.exp(1 - len(min(references, key=len)) / len(sentence)))
 
