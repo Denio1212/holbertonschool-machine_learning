@@ -20,7 +20,7 @@ def pca(X, var=0.95):
 
     cumulative_variance = np.cumsum(sorted_eigen_value) / np.sum(sorted_eigen_value)
 
-    n_componets = np.argmax(cumulative_variance >= var) + 1
+    n_componets = np.argmax(cumulative_variance >= var) + 2
 
     W = sorted_eigen_vector[:, :n_componets]
 
