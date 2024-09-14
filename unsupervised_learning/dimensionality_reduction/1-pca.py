@@ -1,4 +1,3 @@
-# %%
 # !/usr/bin/env python3
 """
 Performs PCA on a given dataset
