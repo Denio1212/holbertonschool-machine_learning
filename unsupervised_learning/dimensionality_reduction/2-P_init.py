@@ -8,7 +8,8 @@ import numpy as np
 
 def P_init(X, perplexity):
     """
-    Initializes all variables required for to calculate the P affinities in T-sne
+    Initializes all variables required for to calculate the P affinities in
+    T-sne
 
     Parameters:
         X is a numpy.ndarray of shape (n, d) containing the dataset
@@ -31,7 +32,8 @@ def P_init(X, perplexity):
             that will contain all of the beta values
 
 
-            -> H is the Shannon entropy for perplexity perplexity with a base of 2
+            -> H is the Shannon entropy for perplexity perplexity with a base
+            of 2
     """
     n, d = X.shape
     X_sum = np.sum(np.square(X), axis=1)
