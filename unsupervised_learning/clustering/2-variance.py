@@ -11,6 +11,13 @@ def variance(X, C):
     """
     Calculates the variance of the cluster centroids.
     """
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+        return None
+    if not isinstance(C, np.ndarray) or len(C.shape) != 2:
+        return None
+    if X.shape[1] != C.shape[1]:
+        return None
+
     n, d = X.shape
     centeroids_extend = C[:, np.newaxis]
     distances = np.sqrt(((X - centeroids_extend) ** 2).sum(axis=2))
