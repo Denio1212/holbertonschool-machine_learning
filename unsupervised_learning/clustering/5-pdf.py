@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 Calculates the probability density function of a Gaussian Distribution
 """
