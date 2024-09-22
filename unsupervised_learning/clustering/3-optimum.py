@@ -1,4 +1,4 @@
-#!/usr/bin/env pyhon3
+#!/usr/bin/env python3
 """
 Tests for the optimum number of clusters by variance.
 """
