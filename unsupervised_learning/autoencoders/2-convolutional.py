@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """Convolutional Autoencoder Module"""
 import tensorflow.keras as keras
