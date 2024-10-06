@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Variational Autoencoder Module"""
+"""Variational Autoencoder Modula"""
 import tensorflow.keras as keras
 
 
